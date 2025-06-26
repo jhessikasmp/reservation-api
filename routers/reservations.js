@@ -1,19 +1,19 @@
-const express = require('express')
-const reservationController = require("../controllers/reservationController")
+const express = require ("express")
+const reservationController = require('../controllers/reservationController')
 
 const router = express.Router()
+
 
 /**
  * @swagger
  * /api/reservations:
  *   get:
- *     summary: Lista todas as reservas
+ *     summary: Elenca tutte le prenotazioni
  *     responses:
  *       200:
- *         description: Lista de reservas
+ *         description: Elenco delle prenotazioni
  */
-router.get('/', reservationController.allReservations)
-
+router.get('/')
 
 /**
  * @swagger
@@ -39,14 +39,14 @@ router.get('/', reservationController.allReservations)
  *       201:
  *         description: Reserva criada
  */
-router.post('/', reservationController.createReservatio)
+router.post('/')
 
 
 /**
  * @swagger
  * /api/reservations/{id}/guests:
  *   patch:
- *     summary: Atualiza apenas o número de pessoas da reserva
+ *     summary: Aggiorna solo il numero di ospiti della prenotazione
  *     parameters:
  *       - in: path
  *         name: id
@@ -64,16 +64,15 @@ router.post('/', reservationController.createReservatio)
  *                 type: integer
  *     responses:
  *       200:
- *         description: Número de pessoas atualizado
+ *         description: Numero di ospiti aggiornato
  */
-router.patch('/:id', reservationController.updateGuests)
-
+router.patch('/:id')
 
 /**
  * @swagger
  * /api/reservations/{id}:
  *   delete:
- *     summary: Cancela uma reserva
+ *     summary: Cancella una prenotazione
  *     parameters:
  *       - in: path
  *         name: id
@@ -82,8 +81,6 @@ router.patch('/:id', reservationController.updateGuests)
  *           type: integer
  *     responses:
  *       200:
- *         description: Reserva cancelada
+ *         description: Prenotazione cancellata
  */
-router.delete('/:id', reservationController.deleteReservatio)
-
-module.exports = router
+router.delete('/:id')

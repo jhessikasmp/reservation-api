@@ -1,42 +1,40 @@
-const express = require ('express')
-const dotenv = require ('dotenv')
-const reservationRoutes = require('./routers/reservations')
-const logger = require('./logger')
-const swaggerUi = require('swagger-ui-express'); 
-const swaggerJsdoc = require('swagger-jsdoc');
+const express = require ("express")
+const dotenv = require("dotenv")
+const reservationsRouter = require('./routers/reservations')
+const logger = require("./logger")
+const swaggerUi = require('swagger-ui-express')
+const swaggerJsdoc = require('swagger-jsdoc')
 
 dotenv.config()
 
 const app = express()
-const PORT = process.env.PORT || 3000
+const PORT = process.env.PORT || 4000
 
 app.use(express.json())
 
-const swaggerOptions = { 
+//swagger setup
+const swaggerOption = {
   swaggerDefinition: {
-    openapi: '3.0.0', 
+    opeapi: '3.0.0',
     info: {
-      title: 'API de Reservas', 
+      title: 'API di Prenotazioni',
       version: '1.0.0',
-      description: 'Documentação da API de Reservas para Restaurantes' 
+      description: 'Documentazione della API di Prenotazioni per Ristoranti'
     }
   },
-  apis: ['./routes/*.js'], 
-};
+  apis: ['./routes/*.js']
+}
 
-const swaggerDocs = swaggerJsdoc(swaggerOptions);
+const swaggerDocs = swaggerJsdoc(swaggerOption)
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs))
 
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
-
-
-
-app.use('/api/reservations', reservationRoutes)
-
-app.get('/', (req,res) => {
-    res.send('API di Gestione Prenotazioni per Ristoranti')
+//Routers
+app.use('/api/reservations', reservationsRouter)
+app.get('/', (req,res)=> {
+  res.send('API di Gestione Prenotazioni per Ristoranti')
 })
 
 app.listen(PORT, ()=> {
-    logger.info(`Servidor in esecuzione sulla porta ${PORT}`)
-    console.log(`Servidor in esecuzione sulla porta ${PORT}`)
-}) 
+  logger.info(`Servidor in esecuzione sulla porta ${PORT}`)
+  console.log(`Servidor in esecuzione sulla porta ${PORT}`)
+})
