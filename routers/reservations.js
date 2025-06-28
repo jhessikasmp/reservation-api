@@ -19,7 +19,7 @@ router.get('/')
  * @swagger
  * /api/reservations:
  *   post:
- *     summary: Cria uma nova reserva
+ *     summary: Crea una nuova prenotazione
  *     requestBody:
  *       required: true
  *       content:
@@ -37,7 +37,7 @@ router.get('/')
  *                 type: integer
  *     responses:
  *       201:
- *         description: Reserva criada
+ *         description: Prenotazione creata
  */
 router.post('/')
 
