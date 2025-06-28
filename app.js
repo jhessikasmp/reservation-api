@@ -15,7 +15,7 @@ app.use(express.json())
 //swagger setup
 const swaggerOption = {
   swaggerDefinition: {
-    opeapi: '3.0.0',
+    openapi: '3.0.0',
     info: {
       title: 'API di Prenotazioni',
       version: '1.0.0',
@@ -38,3 +38,5 @@ app.listen(PORT, ()=> {
   logger.info(`Servidor in esecuzione sulla porta ${PORT}`)
   console.log(`Servidor in esecuzione sulla porta ${PORT}`)
 })
+
+module.exports = app

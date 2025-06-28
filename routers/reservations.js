@@ -1,6 +1,5 @@
 const express = require ("express")
 const reservationController = require('../controllers/reservationController')
-
 const router = express.Router()
 
 
@@ -13,7 +12,7 @@ const router = express.Router()
  *       200:
  *         description: Elenco delle prenotazioni
  */
-router.get('/')
+router.get('/', reservationController.allReservations)
 
 /**
  * @swagger
@@ -39,7 +38,7 @@ router.get('/')
  *       201:
  *         description: Prenotazione creata
  */
-router.post('/')
+router.post('/', reservationController.createReservation)
 
 
 /**
@@ -66,7 +65,7 @@ router.post('/')
  *       200:
  *         description: Numero di ospiti aggiornato
  */
-router.patch('/:id')
+router.patch('/:id', reservationController.updateGuests)
 
 /**
  * @swagger
@@ -83,4 +82,6 @@ router.patch('/:id')
  *       200:
  *         description: Prenotazione cancellata
  */
-router.delete('/:id')
+router.delete('/:id', reservationController.deleteReservation)
+
+module.exports = router
