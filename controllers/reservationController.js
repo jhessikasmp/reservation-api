@@ -1,3 +1,4 @@
+const { validate: isUuid } = require('uuid');
 const reservation = require("../models/reservations");
 const logger = require("..//logger"); 
 
@@ -13,14 +14,13 @@ exports.createReservation = (req, res) => {
     }
     const newReservation = reservation.create({ name, date, time, guests });
     logger.info('Pronotazione creata', { reservation: newReservation });
-    res.status(201).json({ message: `In caso di disdetta, la prenotazione deve essere annullata o comunque comunicata con 
-        almeno un'ora di anticipo rispetto all'orario stabilito`, newReservation });
+    res.status(201).json({ message: `In caso di disdetta, la prenotazione deve essere annullata o comunque comunicata con almeno un'ora di anticipo rispetto all'orario stabilito`, newReservation });
 };
 
 exports.updateGuests = (req, res) => {
-    const id = parseInt(req.params.id);
+    const id = req.params.id;
     const { guests } = req.body;
-    if (!id) {
+    if (!isUuid(id)) {
         return res.status(400).json({ error: 'ID non è stata trovato' });
     }
     if (guests === undefined) {
@@ -38,10 +38,10 @@ exports.updateGuests = (req, res) => {
 };
 
 exports.deleteReservation = (req, res) => {
-    const id = parseInt(req.params.id);
+    const id = req.params.id;
 
-    if (!id) {
-        return res.status(400).json({ error: 'ID inválido' });
+    if (!isUuid(id)) {
+        return res.status(400).json({ error: 'ID non è stata trovato' });
     }
 
     const success = reservation.delete(id);
