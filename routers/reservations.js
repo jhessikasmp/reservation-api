@@ -2,7 +2,6 @@ const express = require ("express")
 const reservationController = require('../controllers/reservationController')
 const router = express.Router()
 
-
 /**
  * @swagger
  * /api/reservations:
@@ -40,10 +39,9 @@ router.get('/', reservationController.allReservations)
  */
 router.post('/', reservationController.createReservation)
 
-
 /**
  * @swagger
- * /api/reservations/{id}/guests:
+ * /api/reservations/{id}:
  *   patch:
  *     summary: Aggiorna solo il numero di ospiti della prenotazione
  *     parameters:
@@ -51,7 +49,7 @@ router.post('/', reservationController.createReservation)
  *         name: id
  *         required: true
  *         schema:
- *           type: integer
+ *           type: string
  *     requestBody:
  *       required: true
  *       content:
@@ -77,7 +75,7 @@ router.patch('/:id', reservationController.updateGuests)
  *         name: id
  *         required: true
  *         schema:
- *           type: integer
+ *           type: string
  *     responses:
  *       200:
  *         description: Prenotazione cancellata

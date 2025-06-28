@@ -22,7 +22,7 @@ const swaggerOption = {
       description: 'Documentazione della API di Prenotazioni per Ristoranti'
     }
   },
-  apis: ['./routes/*.js']
+  apis: ['./routers/*.js']
 }
 
 const swaggerDocs = swaggerJsdoc(swaggerOption)
